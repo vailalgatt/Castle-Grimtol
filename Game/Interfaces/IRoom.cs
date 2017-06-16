@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace CastleGrimtol.Game
@@ -7,7 +8,6 @@ namespace CastleGrimtol.Game
         string Name { get; set; }
         string Description { get; set; }
         List<Item> Items { get; set; }
-
         void UseItem(Item item);
 
     }
