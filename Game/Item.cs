@@ -8,7 +8,11 @@ namespace CastleGrimtol.Game
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public Dictionary<string, int> Items = new Dictionary<string, int>();
+        public Item(string Name, string Description)
+        {
+            this.Name = Name;
+            this.Description = Description;
+        }
 
     }
 }
