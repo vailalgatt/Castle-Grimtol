@@ -55,6 +55,7 @@ namespace CastleGrimtol.Game
             {
                 System.Console.WriteLine($"Items: {room.Items[i].Name}\n");
             }
+            System.Console.WriteLine($"Score: {CurrentPlayer.Score}");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
@@ -105,8 +106,9 @@ namespace CastleGrimtol.Game
             if (itemName.ToLower() == potatoWin)
             {
                 Console.WriteLine("The magical properties of this potato causes the owner of the potato to become repellent to any kind of conversation. You are safe from social interaction.");
+                CurrentPlayer.Score += 15;
             }
-            if(itemName.ToLower() == napLose)
+            if (itemName.ToLower() == napLose)
             {
                 Console.WriteLine("Go home, GRANDMA!");
                 Console.ForegroundColor = ConsoleColor.Red;

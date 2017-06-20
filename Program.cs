@@ -53,7 +53,7 @@ namespace CastleGrimtol
                 {
                     game.CurrentRoom = nextRoom;
                     System.Console.WriteLine("\n");
-                    //game.CurrentPlayer.Score += 2;
+                    game.CurrentPlayer.Score += 2;
                     game.Look(game.CurrentRoom);
                 }
                 else
