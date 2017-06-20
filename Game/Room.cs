@@ -31,16 +31,5 @@ namespace CastleGrimtol.Game
         {
             Exits.Add(direction, room);
         }
-
-        // public void Stuff(string name, Room room)
-        // {
-        //     InUse.Add(name, room);
-        // }
-
-
-        //dictionary of direction
-        //first value a string
-        //second value a room
-        //Dictionary<string, object, exits>
     }
 }
