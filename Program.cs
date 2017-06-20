@@ -9,13 +9,13 @@ namespace CastleGrimtol
         public static void Main(string[] args)
         {
             Game.Game game = new Game.Game();
-            Boolean playing = true;
+            game.Playing = true;
 
             game.Setup();
             game.BuildRooms();
             System.Console.WriteLine($"{game.CurrentRoom.Name}:\n{game.CurrentRoom.Description}");
 
-            while (playing)
+            while (game.Playing)
             {
 
                 string userChoice = game.GetUserInput().ToLower();
@@ -47,7 +47,7 @@ namespace CastleGrimtol
                 }
                 else if (userAction[0] == "q" || userAction[0] == "quit")
                 {
-                    playing = game.Quit(playing);
+                    game.Playing = game.Quit(game.Playing);
                 }
                 else if (nextRoom != null)
                 {

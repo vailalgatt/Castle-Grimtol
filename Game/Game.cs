@@ -9,6 +9,7 @@ namespace CastleGrimtol.Game
         public Player CurrentPlayer { get; set; }
         // public Dictionary<string, Room> Rooms = new Dictionary<string, Room>();
         //public Dictionary<string, Item> Inventory = new Dictionary<string, Item>();
+        public Boolean Playing = true;
 
         public void Reset()
         {
@@ -59,6 +60,7 @@ namespace CastleGrimtol.Game
 
         public void Help()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             System.Console.WriteLine("Valid actions are north and south.\nEX: north or south.\nLOOK or l: allows you to scan the room. \nHELP or h: displays a list of all the commands needed for this game.\nTAKE or t: adds an item to your inventory list. EX: Take Potato.\nINVENTORY or i: Views the items in your inventory.\nQUIT or q: leaves the game.\n");
         }
 
@@ -66,42 +68,51 @@ namespace CastleGrimtol.Game
         public void BuildRooms()
         {
             Room path = new Room("Path", "You begin on a path, there is no other direction than forward to move. You look around for anything to entertain you on your journey. (hint: use 'look')");
-            Room bridge = new Room("Bridge", "This is a bridge");
-            Room canyon = new Room("Canyon", "This is a canyon");
-            Room tree = new Room("Tree", "This is a tree");
+            Room bridge = new Room("Bridge", "You walk a little ways until you find a small bridge crossing a raging river.");
+            Room hill = new Room("Hill", "After you cross the bridge, you make your way up a hill. As you're trekking you are accosted by a mean little troll. The troll is relentless, look in your inventory to use something to get rid of the troll. (hint: use 'inventory')");
+            Room tree = new Room("Tree", "You're encounter with the troll has left you exhausted. You sluggishly approach a tall redwood tree. There is a soft patch of grass at the base of the tree. You curl up on the patch of grass and take a nap. :) THE END");
 
             BuildExits();
             BuildItems();
+            //ItemToRoom();
 
 
             void BuildExits()
             {
                 path.Door("north", bridge);
                 bridge.Door("south", path);
-                bridge.Door("north", canyon);
-                canyon.Door("south", bridge);
-                canyon.Door("north", tree);
-                tree.Door("south", canyon);
+                bridge.Door("north", hill);
+                hill.Door("south", bridge);
+                hill.Door("north", tree);
+                tree.Door("south", hill);
             }
             void BuildItems()
             {
-
-                //Items
                 Item potato = new Item("Potato", "A magical potato");
                 path.Items.Add(potato);
+
+                Item nap = new Item("Nap", "For emergencies only");
+                path.Items.Add(nap);
             }
+
             CurrentRoom = path;
         }
 
         public void UseItem(string itemName)
         {
-
-            // Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
-            // if (item != null)
-            // {
-            //     CurrentRoom.Items.Remove(item);
-            //     CurrentPlayer.Inventory.Add(item);
-            // }
+            string potatoWin = "potato";
+            string napLose = "nap";
+            if (itemName.ToLower() == potatoWin)
+            {
+                Console.WriteLine("The magical properties of this potato causes the owner of the potato to become repellent to any kind of conversation. You are safe from social interaction.");
+            }
+            if(itemName.ToLower() == napLose)
+            {
+                Console.WriteLine("Go home, GRANDMA!");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("GAME OVER");
+                Playing = false;
+            }
         }
 
         public void Take(string itemName)
