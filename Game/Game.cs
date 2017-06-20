@@ -13,6 +13,7 @@ namespace CastleGrimtol.Game
 
         public void Reset()
         {
+
         }
 
         public void Setup()
@@ -68,10 +69,12 @@ namespace CastleGrimtol.Game
 
         public void BuildRooms()
         {
-            Room path = new Room("Path", "You begin on a path, there is no other direction than forward to move. You look around for anything to entertain you on your journey. (hint: use 'look')");
+            Room path = new Room("Path", "You begin on a path, to your right you see a field of adorable pugs, straight ahead is a bridge. You look around for anything to entertain you on your journey. (hint: use 'look')");
+            Room field = new Room("Field", "Take a break from adventuring and get some pug snuggles.");
             Room bridge = new Room("Bridge", "You walk a little ways until you find a small bridge crossing a raging river.");
             Room hill = new Room("Hill", "After you cross the bridge, you make your way up a hill. As you're trekking you are accosted by a mean little troll. The troll is relentless, look in your inventory to use something to get rid of the troll. (hint: use 'inventory')");
-            Room tree = new Room("Tree", "You're encounter with the troll has left you exhausted. You sluggishly approach a tall redwood tree. There is a soft patch of grass at the base of the tree. You curl up on the patch of grass and take a nap. :) THE END");
+            Room tree = new Room("Tree", "You're encounter with the troll has left you exhausted. You sluggishly approach a tall redwood tree. There is a soft patch of grass at the base of the tree. You curl up on the patch of grass and take a well deserved nap. :) THE END");
+
 
             BuildExits();
             BuildItems();
@@ -81,6 +84,8 @@ namespace CastleGrimtol.Game
             void BuildExits()
             {
                 path.Door("north", bridge);
+                path.Door("east", field);
+                field.Door("west", path);
                 bridge.Door("south", path);
                 bridge.Door("north", hill);
                 hill.Door("south", bridge);
@@ -107,6 +112,10 @@ namespace CastleGrimtol.Game
             {
                 Console.WriteLine("The magical properties of this potato causes the owner of the potato to become repellent to any kind of conversation. You are safe from social interaction.");
                 CurrentPlayer.Score += 15;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("WINNER WINNER WINNER");
+                Console.WriteLine("You've become the ultimate introvert. Revel in your solitude.");
+                Playing = false;
             }
             if (itemName.ToLower() == napLose)
             {
